@@ -100,7 +100,7 @@ import pandas as pd
 import re
 
 st.set_page_config("SA Report Automation", layout="wide")
-st.title("📊 SA Monthly Monitoring Automation")
+st.title("📊 SA Monthly Report")
 
 
 # ==========================
