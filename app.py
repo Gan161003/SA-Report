@@ -231,12 +231,12 @@ def detect_brand(filename):
     
 
 brand_name = detect_brand(media_file.name)
-def extract_qt(filename):
-    match = re.search(r"qt\d+", filename.lower())
-    if match:
-        return match.group(0).upper()
-    return "QTXXXXXXX"
-qt_number = extract_qt(media_file.name)
+# def extract_qt(filename):
+#     match = re.search(r"qt\d+", filename.lower())
+#     if match:
+#         return match.group(0).upper()
+#     return "QTXXXXXXX"
+# qt_number = extract_qt(media_file.name)
 
 
 
@@ -2304,7 +2304,8 @@ st.success("✅ SA Report Generated Successfully")
 st.download_button(
     "⬇️ Download SA Report",
     data=final_output.getvalue(),
-    file_name=f"SA_Report_{brand_name}_{qt_number}.xlsx",
+    # file_name=f"SA_Report_{brand_name}_{qt_number}.xlsx",
+    file_name="SA_Report.xlsx",
     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 )
 
