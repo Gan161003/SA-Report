@@ -231,12 +231,12 @@ def detect_brand(filename):
     
 
 brand_name = detect_brand(media_file.name)
-# def extract_qt(filename):
-#     match = re.search(r"qt\d+", filename.lower())
-#     if match:
-#         return match.group(0).upper()
-#     return "QTXXXXXXX"
-# qt_number = extract_qt(media_file.name)
+def extract_qt(filename):
+    match = re.search(r"qt\d+", filename.lower())
+    if match:
+        return match.group(0).upper()
+    return "QTXXXXXXX"
+qt_number = extract_qt(media_file.name)
 
 
 
