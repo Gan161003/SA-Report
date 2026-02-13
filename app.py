@@ -2298,7 +2298,7 @@ st.success("✅ SA Report Generated Successfully")
 st.download_button(
     "⬇️ Download SA Report",
     data=final_output.getvalue(),
-    file_name="SA_Report_Final.xlsx",
+    file_name="SA_Report.xlsx",
     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 )
 
