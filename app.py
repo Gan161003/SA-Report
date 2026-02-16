@@ -1727,11 +1727,11 @@ for df in media_plan_items.values():
     df["End Date"] = campaign_end
 
     df["Campaign Days"] = (campaign_end - campaign_start).days + 1
-    df["Monitoring Days"] = (campaign_end - campaign_start).days + 1
+    # df["Monitoring Days"] = (campaign_end - campaign_start).days + 1
 
-    # df["Monitoring Days"] = df["Live Date"].apply(
-    #     lambda x: (campaign_end - x).days + 1 if pd.notna(x) else None
-    # )
+    df["Monitoring Days"] = df["Live Date"].apply(
+        lambda x: (campaign_end - x).days + 1 if pd.notna(x) else None
+    )
 
 
 # ---------- Write Excel ----------
