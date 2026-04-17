@@ -262,7 +262,7 @@ for sheet in media_xl.sheet_names:
             
             if "unique" in row_text and "buy" in row_text:
             # dates = pd.to_datetime(row, errors="coerce", dayfirst=True).dropna()
-            dates = pd.to_datetime(pd.Series(row.values), errors="coerce", dayfirst=True).dropna()
+                dates = pd.to_datetime(pd.Series(row.values), errors="coerce", dayfirst=True).dropna()
 
             if not dates.empty:
 
