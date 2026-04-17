@@ -257,7 +257,8 @@ for sheet in media_xl.sheet_names:
 
         for _, row in checklist.iterrows():
 
-            text = " ".join(row.astype(str).str.lower())
+            # text = " ".join(row.astype(str).str.lower())
+            text = " ".join([str(x).lower() for x in row.values if pd.notna(x)])
             dates = pd.to_datetime(row, errors="coerce", dayfirst=True).dropna()
 
             if not dates.empty:
