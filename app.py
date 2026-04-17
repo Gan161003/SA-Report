@@ -454,8 +454,13 @@ for sheet in ad_type_sheets:
     # ---- detect header row ----
     header_row = None
     for i in range(min(25, len(raw))):
-        row = raw.iloc[i].astype(str).str.lower()
-        if "unique" in " ".join(row) and "buy" in " ".join(row):
+        row = raw.iloc[i]
+
+        row_text = " ".join([
+            str(x).lower() for x in row.values if pd.notna(x)
+        ])
+        
+        if "unique" in row_text and "buy" in row_text:
             header_row = i
             break
 
