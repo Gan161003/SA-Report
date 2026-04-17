@@ -246,6 +246,34 @@ qt_number = extract_qt(media_file.name)
 # PHASE 3 — CAMPAIGN DATE EXTRACTION FROM CHECKLIST
 # =====================================================
 
+# campaign_start = None
+# campaign_end = None
+
+# for sheet in media_xl.sheet_names:
+
+#     if "checklist" in normalize(sheet):
+
+#         checklist = media_xl.parse(sheet, header=None)
+
+#         for _, row in checklist.iterrows():
+
+#             # text = " ".join(row.astype(str).str.lower())
+#             row_text = " ".join([str(x).lower() for x in row.values if pd.notna(x)])
+            
+#             if "unique" in row_text and "buy" in row_text:
+#             # dates = pd.to_datetime(row, errors="coerce", dayfirst=True).dropna()
+#                 dates = pd.to_datetime(pd.Series(row.values), errors="coerce", dayfirst=True).dropna()
+
+#             if not dates.empty:
+
+#                 if "from" in text and campaign_start is None:
+#                     campaign_start = dates.iloc[0]
+
+#                 if "till" in text and campaign_end is None:
+#                     campaign_end = dates.iloc[0]
+
+
+
 campaign_start = None
 campaign_end = None
 
@@ -257,21 +285,24 @@ for sheet in media_xl.sheet_names:
 
         for _, row in checklist.iterrows():
 
-            # text = " ".join(row.astype(str).str.lower())
-            row_text = " ".join([str(x).lower() for x in row.values if pd.notna(x)])
-            
-            if "unique" in row_text and "buy" in row_text:
-            # dates = pd.to_datetime(row, errors="coerce", dayfirst=True).dropna()
-                dates = pd.to_datetime(pd.Series(row.values), errors="coerce", dayfirst=True).dropna()
+            row_text = " ".join(
+                [str(x).lower() for x in row.values if pd.notna(x)]
+            )
+
+            # ✅ ALWAYS compute dates (not inside condition)
+            dates = pd.to_datetime(
+                pd.Series(row.values),
+                errors="coerce",
+                dayfirst=True
+            ).dropna()
 
             if not dates.empty:
 
-                if "from" in text and campaign_start is None:
+                if "from" in row_text and campaign_start is None:
                     campaign_start = dates.iloc[0]
 
-                if "till" in text and campaign_end is None:
+                if "till" in row_text and campaign_end is None:
                     campaign_end = dates.iloc[0]
-
 
 if not campaign_start or not campaign_end:
     st.error("Could not detect campaign start/end dates from Checklist")
