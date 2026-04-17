@@ -1104,20 +1104,34 @@ st.success("✅ CRAFT planned & reported values mapped to all ad types")
 # =====================================================
 
 
+# def load_publisher(file):
+#     raw = pd.read_excel(file, header=None)
+
+#     for i in range(min(30, len(raw))):
+#         row = raw.iloc[i].astype(str).str.lower()
+#         joined = " ".join(row)
+
+#         if any(x in joined for x in ["campaign", "placement", "insertion", "unique"]):
+#             if "date" in joined or "day" in joined:
+#                 return pd.read_excel(file, header=i)
+
+#     return pd.read_excel(file)
+
 def load_publisher(file):
     raw = pd.read_excel(file, header=None)
 
     for i in range(min(30, len(raw))):
-        row = raw.iloc[i].astype(str).str.lower()
-        joined = " ".join(row)
+        row = raw.iloc[i]
+
+        joined = " ".join([
+            str(x).lower() for x in row.values if pd.notna(x)
+        ])
 
         if any(x in joined for x in ["campaign", "placement", "insertion", "unique"]):
             if "date" in joined or "day" in joined:
                 return pd.read_excel(file, header=i)
 
     return pd.read_excel(file)
-
-
 
 
 # AMAZON FILE DETECTION (must be defined before use)
