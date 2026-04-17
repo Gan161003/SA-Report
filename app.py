@@ -285,9 +285,7 @@ for sheet in media_xl.sheet_names:
 
         for _, row in checklist.iterrows():
 
-            row_text = " ".join(
-                [str(x).lower() for x in row.values if pd.notna(x)]
-            )
+            row_text = " ".join([str(x).lower() for x in row.values if pd.notna(x)])
 
             # ✅ ALWAYS compute dates (not inside condition)
             dates = pd.to_datetime(
