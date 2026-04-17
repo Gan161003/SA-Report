@@ -258,8 +258,11 @@ for sheet in media_xl.sheet_names:
         for _, row in checklist.iterrows():
 
             # text = " ".join(row.astype(str).str.lower())
-            text = " ".join([str(x).lower() for x in row.values if pd.notna(x)])
-            dates = pd.to_datetime(row, errors="coerce", dayfirst=True).dropna()
+            row_text = " ".join([str(x).lower() for x in row.values if pd.notna(x)])
+            
+            if "unique" in row_text and "buy" in row_text:
+            # dates = pd.to_datetime(row, errors="coerce", dayfirst=True).dropna()
+            dates = pd.to_datetime(pd.Series(row.values), errors="coerce", dayfirst=True).dropna()
 
             if not dates.empty:
 
